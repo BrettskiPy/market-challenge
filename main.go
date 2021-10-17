@@ -6,6 +6,7 @@ import (
 	"github.com/gorilla/mux"
 	"log"
 	"net/http"
+	"regexp"
 	"strings"
 )
 
@@ -34,9 +35,11 @@ func getSingleProduce(w http.ResponseWriter, r *http.Request) {
 		if strings.ToLower(item.Name) == strings.ToLower(params["name"]) {
 			json.NewEncoder(w).Encode(item)
 			return
+		} else {
+			http.Error(w, fmt.Sprintf("The produce item %s does not exist.", params["name"]), 400)
 		}
 	}
-	http.Error(w, fmt.Sprintf("The produce item %s does not exist.", params["name"]), 400)
+
 }
 
 // Add a new produce item
@@ -44,9 +47,14 @@ func addProduce(w http.ResponseWriter, r *http.Request) {
 	w.Header().Set("Content-Type", "application/json")
 	var newProduceItem Produce
 	_ = json.NewDecoder(r.Body).Decode(&newProduceItem)
-	// @todo: add regex for serial validation
-	produce = append(produce, newProduceItem)
-	json.NewEncoder(w).Encode(newProduceItem)
+	re := regexp.MustCompile("^[A-Z0-9]{4}-[A-Z0-9]{4}-[A-Z0-9]{4}-[A-Z0-9]{4}$")
+	if re.MatchString(newProduceItem.Code) == true {
+		produce = append(produce, newProduceItem)
+		json.NewEncoder(w).Encode(newProduceItem)
+	} else {
+		http.Error(w, fmt.Sprintf("Incorrect produce code sequence. Example code: A12T-4GH7-QPL9-3N4M"), 400)
+	}
+
 }
 
 func initializeProduceData(){
