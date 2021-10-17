@@ -25,7 +25,7 @@ func getProduce(w http.ResponseWriter, r *http.Request) {
 	json.NewEncoder(w).Encode(produce)
 }
 
-// Get a single Produce item
+// Get a single produce item
 func getSingleProduce(w http.ResponseWriter, r *http.Request) {
 	w.Header().Set("Content-Type", "application/json")
 	params := mux.Vars(r) // Gets params
@@ -37,6 +37,16 @@ func getSingleProduce(w http.ResponseWriter, r *http.Request) {
 		}
 	}
 	http.Error(w, fmt.Sprintf("The produce item %s does not exist.", params["name"]), 400)
+}
+
+// Add a new produce item
+func addProduce(w http.ResponseWriter, r *http.Request) {
+	w.Header().Set("Content-Type", "application/json")
+	var newProduceItem Produce
+	_ = json.NewDecoder(r.Body).Decode(&newProduceItem)
+	// @todo: add regex for serial validation
+	produce = append(produce, newProduceItem)
+	json.NewEncoder(w).Encode(newProduceItem)
 }
 
 func initializeProduceData(){
@@ -56,7 +66,7 @@ func main() {
 	// Route handles & endpoints
 	router.HandleFunc("/produce", getProduce).Methods("GET")
 	router.HandleFunc("/produce/{name}", getSingleProduce).Methods("GET")
-
+	router.HandleFunc("/produce", addProduce).Methods("POST")
 	// Start server
 	log.Fatal(http.ListenAndServe(":8000", router))
 }
