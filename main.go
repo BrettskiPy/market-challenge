@@ -2,9 +2,11 @@ package main
 
 import (
 	"encoding/json"
+	"fmt"
 	"github.com/gorilla/mux"
 	"log"
 	"net/http"
+	"strings"
 )
 
 // Define the produce structure
@@ -23,6 +25,20 @@ func getProduce(w http.ResponseWriter, r *http.Request) {
 	json.NewEncoder(w).Encode(produce)
 }
 
+// Get a single Produce item
+func getSingleProduce(w http.ResponseWriter, r *http.Request) {
+	w.Header().Set("Content-Type", "application/json")
+	params := mux.Vars(r) // Gets params
+	// Loop through produce and find one with the name from the params
+	for _, item := range produce {
+		if strings.ToLower(item.Name) == strings.ToLower(params["name"]) {
+			json.NewEncoder(w).Encode(item)
+			return
+		}
+	}
+	http.Error(w, fmt.Sprintf("The produce item %s does not exist.", params["name"]), 400)
+}
+
 func initializeProduceData(){
 	// Hardcoded data - @todo: add database
 	produce = append(produce, Produce{Name: "Lettuce", Code: "A12T-4GH7-QPL9-3N4M", Unit_Price: "3.46"})
@@ -39,6 +55,7 @@ func main() {
 	initializeProduceData()
 	// Route handles & endpoints
 	router.HandleFunc("/produce", getProduce).Methods("GET")
+	router.HandleFunc("/produce/{name}", getSingleProduce).Methods("GET")
 
 	// Start server
 	log.Fatal(http.ListenAndServe(":8000", router))
