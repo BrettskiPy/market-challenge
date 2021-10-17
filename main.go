@@ -47,7 +47,7 @@ func addProduce(w http.ResponseWriter, r *http.Request) {
 	w.Header().Set("Content-Type", "application/json")
 	var newProduceItem Produce
 	_ = json.NewDecoder(r.Body).Decode(&newProduceItem)
-	re := regexp.MustCompile("^[A-Z0-9]{4}-[A-Z0-9]{4}-[A-Z0-9]{4}-[A-Z0-9]{4}$")
+	re := regexp.MustCompile("^[a-zA-Z0-9]{4}-[a-zA-Z0-9]{4}-[a-zA-Z0-9]{4}-[a-zA-Z0-9]{4}$")
 	if re.MatchString(newProduceItem.Code) == true {
 		produce = append(produce, newProduceItem)
 		json.NewEncoder(w).Encode(newProduceItem)
