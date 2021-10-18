@@ -36,8 +36,6 @@ func getSingleProduce(w http.ResponseWriter, r *http.Request) {
 		if strings.ToLower(item.Name) == strings.ToLower(params["name"]) {
 			json.NewEncoder(w).Encode(item)
 			return
-		} else {
-			http.Error(w, fmt.Sprintf("The produce item %s does not exist.", params["name"]), 400)
 		}
 	}
 }
@@ -53,8 +51,21 @@ func addProduce(w http.ResponseWriter, r *http.Request) {
 		produce = append(produce, newProduceItem)
 		json.NewEncoder(w).Encode(newProduceItem)
 	} else {
-		http.Error(w, fmt.Sprintf("Incorrect produce code sequence or product name. Example code sequence: A12T-4GH7-QPL9-3N4M"), 400)
+		http.Error(w, fmt.Sprintf("Incorrect produce code sequence or product name. Example code sequence: A12T-4GH7-QPL9-3N4M"), http.StatusBadRequest)
 	}
+}
+
+// Delete produce item
+func deleteProduceItem(w http.ResponseWriter, r *http.Request) {
+	w.Header().Set("Content-Type", "application/json")
+	params := mux.Vars(r)
+	for index, item := range produce {
+		if item.Name == params["name"] {
+			produce = append(produce[:index], produce[index+1:]...)
+			break
+		}
+	}
+	json.NewEncoder(w).Encode(produce)
 }
 
 func initializeProduceData(){
@@ -75,6 +86,7 @@ func main() {
 	router.HandleFunc("/produce", getProduce).Methods("GET")
 	router.HandleFunc("/produce/{name}", getSingleProduce).Methods("GET")
 	router.HandleFunc("/produce", addProduce).Methods("POST")
+	router.HandleFunc("/produce/{name}", deleteProduceItem).Methods("DELETE")
 	// Start server
 	log.Fatal(http.ListenAndServe(":8000", router))
 }
