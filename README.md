@@ -1,2 +1,1 @@
-# marketing-challenge
- 
+# market-challenge
