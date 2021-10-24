@@ -54,6 +54,7 @@ to the market website or you are targeting the endpoints via an api tool such as
     <td><b>Description</b></td>
     <td><b>Sample JSON Output</b></td>
   </tr>
+  <tr></tr>
   <tr>
     <td>/produce/{name}</td>
     <td>Retrieval of a single produce item and its associated data</td>
@@ -63,6 +64,7 @@ to the market website or you are targeting the endpoints via an api tool such as
     "unit_price": 3.46
 }</code></pre></td>
   </tr>
+  <tr></tr>
   <tr>
     <td>/produce</td>
     <td>Retrieval of all the produce items and its associated data</td>
@@ -93,6 +95,7 @@ to the market website or you are targeting the endpoints via an api tool such as
     <td><b>Description</b></td>
     <td><b>Sample JSON Input</b></td>
   </tr>
+  <tr></tr>
   <tr>
     <td>/produce/{name}</td>
     <td>Adds a single produce item and its associated data.</td>
@@ -102,6 +105,7 @@ to the market website or you are targeting the endpoints via an api tool such as
     "unit_price": 3.59
 }</code></pre></td>
   </tr>
+  <tr></tr>
 <tr>
     <td>/produce/{names}</td>
     <td>Adds multiple produce items and its associated data.</td>
@@ -122,6 +126,7 @@ to the market website or you are targeting the endpoints via an api tool such as
 
 <h4>DELETE</h4>
 <table>
+  <tr></tr>
   <tr>
     <td><b>Endpoint</b></td>
     <td><b>Description</b></td>
