@@ -7,7 +7,7 @@
 <h2>What is this?</h2>
 
 <p> The Supermarket API was designed for grocery store employees to manage and retrieve 
-produce item data. This is achieved through the use of a <a href="https://www.redhat.com/en/topics/api/what-is-a-rest-api">RESTful API.</a>
+produce item data. This functionality is achieved through the use of a <a href="https://www.redhat.com/en/topics/api/what-is-a-rest-api">RESTful API.</a>
 The specifications for this project are found <a href="https://gist.github.com/tomtoday/ef8e8c01582036ce3edc42fee44a3691">here.</a></p>
 
 
