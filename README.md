@@ -5,14 +5,14 @@
 
 
 <h2>What is this?</h2>
-<hr>
+
 <p> The Supermarket API was designed for grocery store employees to manage and retrieve 
 produce item data. This is achieved through the use of a <a href="https://www.redhat.com/en/topics/api/what-is-a-rest-api">RESTful API.</a>
 The specifications for this project are found <a href="https://gist.github.com/tomtoday/ef8e8c01582036ce3edc42fee44a3691">here.</a></p>
 
 
 <h2>What does the API do?</h2>
-<hr>
+
 <h3>Item retrievals via GET</h3>
 <p>Allows a user to retrieve a single or multiple produce items.</p>
 <h3>Item additions via POST</h3>
@@ -21,7 +21,7 @@ The specifications for this project are found <a href="https://gist.github.com/t
 <p>Allows a user to delete a single produce item.</p>
 
 <h2>What data fields define a produce item?</h2>
-<hr>
+
 <h3>Produce item field descriptions:</h3>
 <ul>
   <li><b>name</b> - A required field that represents the official name of a produce item.</li>
@@ -34,7 +34,7 @@ The specifications for this project are found <a href="https://gist.github.com/t
 {"name": "Apple", "code": "Z931-44D4-A12T-1224", "unit_price": 5.33}
 
 <h2>How do I use the market APIs?</h2>
-<hr>
+
 Below are the descriptions of each API endpoint and functionality. It is assumed you have a working connection 
 to the market website or targeting the endpoints via an api tool such as <a href="https://www.postman.com/">postman.</a>
 <h3>GET</h3>
