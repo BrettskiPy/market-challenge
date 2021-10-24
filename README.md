@@ -97,7 +97,7 @@ to the market website or you are targeting the endpoints via an API tool such as
   </tr>
   <tr></tr>
   <tr>
-    <td>/produce/{name}</td>
+    <td>/produce</td>
     <td>Adds a single produce item and its associated data.</td>
     <td><pre><code>{
     "name": "Gala Apple",
@@ -107,7 +107,7 @@ to the market website or you are targeting the endpoints via an API tool such as
   </tr>
   <tr></tr>
 <tr>
-    <td>/produce/{names}</td>
+    <td>/produce</td>
     <td>Adds multiple produce items and its associated data.</td>
     <td><pre><code>[
     {
@@ -136,9 +136,6 @@ to the market website or you are targeting the endpoints via an API tool such as
     <td>Deletes a single produce item and its associated data.</td>
   </tr>
 </table>
-
-
-
 
 
 
