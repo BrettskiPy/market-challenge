@@ -19,7 +19,11 @@ type Produce struct {
 }
 
 // Init produce var as a Produce slice
-var produce []Produce
+type ProduceList []Produce
+
+// global var where all produce is kept
+var produce ProduceList
+
 
 // Get all produce
 func getProduce(w http.ResponseWriter, r *http.Request) {
@@ -42,16 +46,33 @@ func getSingleProduce(w http.ResponseWriter, r *http.Request) {
 
 // Add a new produce item
 func addProduce(w http.ResponseWriter, r *http.Request) {
-	w.Header().Set("Content-Type", "application/json")
-	var newProduceItem Produce
-	_ = json.NewDecoder(r.Body).Decode(&newProduceItem)
+	// Accept json and decode it into a slice of structs
+	var newProduceItems ProduceList
+	err := json.NewDecoder(r.Body).Decode(&newProduceItems)
+	if err != nil {
+		log.Panic(err)
+	}
+
+	var tempItems ProduceList
 	re := regexp.MustCompile("^[a-zA-Z0-9]{4}-[a-zA-Z0-9]{4}-[a-zA-Z0-9]{4}-[a-zA-Z0-9]{4}$")
-	if re.MatchString(newProduceItem.Code) == true && len(newProduceItem.Name) > 0{
-		newProduceItem.Unit_Price = math.Round(newProduceItem.Unit_Price*100)/100 //rounds to the nearest cent
-		produce = append(produce, newProduceItem)
-		json.NewEncoder(w).Encode(newProduceItem)
-	} else {
-		http.Error(w, fmt.Sprintf("Incorrect produce code sequence or product name. Example code sequence: A12T-4GH7-QPL9-3N4M"), http.StatusBadRequest)
+
+	// Iterate over each element in the POSTed JSON and validate. If not validated, error out and stop
+	for idx, produceItem := range newProduceItems {
+		if !re.MatchString(produceItem.Code) || len(produceItem.Name) <= 0 {
+			errMsg := fmt.Sprintf("Item %d: Incorrect produce code sequence or product name. Example code sequence: A12T-4GH7-QPL9-3N4M", idx)
+			http.Error(w, errMsg, http.StatusBadRequest)
+			return
+		}
+
+		produceItem.Unit_Price = math.Round(produceItem.Unit_Price*100) / 100 //rounds to the nearest cent
+		tempItems = append(tempItems, produceItem)
+	}
+
+	// after validation, append new items to the global accumulator and respond back with added items
+	produce = append(produce, tempItems...)
+	w.Header().Set("Content-Type", "application/json")
+	if err = json.NewEncoder(w).Encode(newProduceItems); err != nil {
+		log.Panic(err)
 	}
 }
 
