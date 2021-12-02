@@ -119,7 +119,7 @@ to the market website or you are targeting the endpoints via an API tool such as
         "name": "Peach",
         "code": "E5T6-9UI3-TH15-QR88",
         "unit_price": 2.99
-    },
+    }
 ]</code></pre></td>
   </tr>
 </table>
