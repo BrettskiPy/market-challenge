@@ -99,11 +99,13 @@ to the market website or you are targeting the endpoints via an API tool such as
   <tr>
     <td>/produce</td>
     <td>Adds a single produce item and its associated data.</td>
-    <td><pre><code>{
-    "name": "Gala Apple",
-    "code": "TQ4C-VV6T-75ZX-1RMR",
-    "unit_price": 3.59
-}</code></pre></td>
+    <td><pre><code>[
+    {
+        "name": "something",
+        "code": "A12T-4GH7-QPL9-3N4M",
+        "unit_price": 3.46
+    }
+]</code></pre></td>
   </tr>
   <tr></tr>
 <tr>
