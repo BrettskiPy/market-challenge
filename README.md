@@ -83,7 +83,7 @@ to the market website or you are targeting the endpoints via an API tool such as
         "name": "Green Pepper",
         "code": "YRT6-72AS-K736-L4AR",
         "unit_price": 0.79
-    },
+    }
 ]</code></pre></td>
   </tr>
 </table>
