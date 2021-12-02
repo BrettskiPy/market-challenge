@@ -101,7 +101,7 @@ to the market website or you are targeting the endpoints via an API tool such as
     <td>Adds a single produce item and its associated data.</td>
     <td><pre><code>[
     {
-        "name": "something",
+        "name": "Key Limes",
         "code": "A12T-4GH7-QPL9-3N4M",
         "unit_price": 3.46
     }
