@@ -1,6 +1,8 @@
+
 <p align="center">
-  <img width="200" src="https://media.istockphoto.com/photos/colorful-vegetables-and-fruits-vegan-food-in-rainbow-colors-picture-id1284690585?s=612x612" alt="produce logo">
+  <img src="https://github.com/BrettskiPy/market-challenge/assets/30988215/f077e491-5e6e-4496-b00a-fd99548f29f2" alt="produce_image">
 </p>
+
 <h1 align="center">The Supermarket API</h1>
 
 <p> The Supermarket API was designed for grocery store employees to manage and retrieve 
